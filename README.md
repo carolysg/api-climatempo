@@ -1,1 +1,7 @@
-# api-clima
+# Projeto de coleta de dados utilizando a API HG Weather
+
+Este projeto foi inteiramente realizado na Google Cloud Plataform (GCP) e consiste das seguintes etapas:
+
+1. Coleta de dados utilizando a API HG Weather: Foram coletados dados do clima da cidade de São Carlos (dados atuais e de previsão) em arquivo JSON. Todo o código foi implantado em uma Cloud Function, que é ativada por um tópico no Pub/Sub, que por sua vez recebe uma mensagem uma vez por dia de um job no Cloud Scheduler.
+2. Tratamento de dados da camada bronze para a silver: Todos os dados coletados (camada bronze) passaram por tratamentos simples, como seleção de colunas e alteração de tipos de dados. Esses dados, por sua vez, foram salvos na camada silver em arquivos CSV. Todo o código foi implantado em uma Cloud Function, que é ativada por um tópico no Pub/Sub, que por sua vez recebe uma mensagem quando um arquivo é colocado na camada bronze.
+3. Upload dos dados no BigQuery: Os dados da camada silver foram upados em duas tabelas no BigQuery, uma para dados em tempo real e uma para dados de previsão de tempo dos próximos dias. Todo o código foi implantado em uma Cloud Function, que é ativada por um tópico no Pub/Sub, que por sua vez recebe uma mensagem quando um arquivo é colocado na camada silver.
